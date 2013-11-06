@@ -5,6 +5,20 @@
 var stringifyJSON = function (obj) {
   // your code goes here
 
+// when parameter obj is an ARRAY
+	if (Array.isArray(obj)) {
+		var sOutput = "";
+
+		_.each(obj, function (value, index, obj){
+			if (value === undefined || typeof(value) === "function" || typeof(value) === "xml")
+				sOutput += stringifyJSON(null) + ",";
+			else
+				sOutput += stringifyJSON(value) + ","; // sOutput will have a "," after the last element
+		});
+		return "[" + sOutput.substr(0, sOutput.length - 1) + "]";
+	}
+
+
 // EXIT conditions  begin
 
  // If undefined, a function, or an XML value is encountered during conversion 
